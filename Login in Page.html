@@ -1,46 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Page | Knowfiy</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-
+    body { font-family: 'Poppins', sans-serif; }
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
     }
-
-    .fade-in {
-      animation: fadeInUp 0.6s ease-out both;
-    }
+    .fade-in { animation: fadeInUp 0.6s ease-out both; }
   </style>
 </head>
 <body class="bg-white text-gray-900">
 
-  <!-- Login Container -->
   <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
     <div class="max-w-md w-full bg-white rounded-xl shadow-md p-8 fade-in transition-all duration-500">
-      
-      <!-- Fixed Header with Logo (Mobile friendly) -->
+
       <div class="flex flex-nowrap items-center justify-center gap-0.5 mb-6">
-  <span class="text-2xl font-semibold text-black whitespace-nowrap">Welcome back to</span>
-  <img src="Website Logo.png" alt="Knowfiy Logo"
-       class="h-7 object-contain transition-transform duration-300 hover:scale-105" />
-</div>
-      <!-- Login Form -->
-      <form action="#" method="POST" class="space-y-6">
+        <span class="text-2xl font-semibold text-black whitespace-nowrap">Welcome back to</span>
+        <img src="Website Logo.png" alt="Knowfiy Logo"
+             class="h-7 object-contain transition-transform duration-300 hover:scale-105" />
+      </div>
+
+      <form id="login-form" class="space-y-6">
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
           <input type="email" id="email" name="email" required
@@ -58,7 +43,7 @@
 
       <p class="mt-6 text-center text-sm text-gray-600 transition-colors duration-300">
         Don't have an account?
-        <a href="Sign Up Page.html" class="text-[#5c5552] font-medium hover:underline">Sign up</a>
+        <a href="signup.html" class="text-[#5c5552] font-medium hover:underline">Sign up</a>
       </p>
       <p class="mt-2 text-center text-xs">
         <a href="index.html" class="text-gray-500 hover:text-[#5c5552] transition-colors duration-300">← Back to Home</a>
@@ -66,5 +51,34 @@
     </div>
   </div>
 
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script>
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyDjuyjezFQ7_xvGi20uxcILluUyTVnopKis",
+      authDomain: "knowfiy-auth.firebaseapp.com",
+      projectId: "knowfiy-auth",
+      storageBucket: "knowfiy-auth.appspot.com",
+      messagingSenderId: "1025371978222",
+      appId: "1:1025371978222:web:fcacbc71ecd416a52336ff"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("✅ Login successful!");
+        window.location.href = "index.html";
+      } catch (err) {
+        alert("❌ Login failed: " + err.message);
+      }
+    });
+  </script>
 </body>
 </html>
