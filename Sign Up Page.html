@@ -83,6 +83,39 @@
       </p>
     </div>
   </div>
+<script>
+  const signupForm = document.querySelector('form');
 
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const fullName = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords don't match.");
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName  // This is user metadata
+        }
+      }
+    });
+
+    if (error) {
+      alert('Signup failed: ' + error.message);
+    } else {
+      alert('Signup successful! Please check your email to confirm.');
+      window.location.href = 'Login in Page.html';
+    }
+  });
+</script>
 </body>
 </html>
