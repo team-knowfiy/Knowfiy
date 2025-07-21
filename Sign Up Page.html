@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Supabase CDN -->
-  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     body {
@@ -80,7 +80,7 @@
     const SUPABASE_URL = 'https://ylgtcwnwdplqwyrqkoxm.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsZ3Rjd253ZHBscXd5cnFrb3htIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwOTIzOTUsImV4cCI6MjA2ODY2ODM5NX0.sDOHrDw-oGOyLI2LsKBxxycAImHg1-xNOz2dNFqsrz4';
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const signupForm = document.getElementById('signup-form');
 
