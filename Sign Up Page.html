@@ -4,14 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign Up Page | Knowfiy</title>
+
+  <!-- Tailwind & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Supabase CDN -->
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
+
   <style>
     body {
       font-family: 'Poppins', sans-serif;
     }
-
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -22,7 +26,6 @@
         transform: translateY(0);
       }
     }
-
     .fade-in {
       animation: fadeInUp 0.6s ease-out both;
     }
@@ -33,7 +36,7 @@
   <!-- Sign Up Container -->
   <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
     <div class="max-w-md w-full bg-white rounded-xl shadow-md p-8 fade-in transition-all duration-500">
-
+      
       <!-- Header -->
       <div class="flex items-center justify-center gap-x-[4px] mb-6">
         <span class="text-2xl font-semibold text-black transition-colors duration-300">Join Knowfiy</span>
@@ -46,7 +49,7 @@
           <input type="text" id="name" name="name" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5c5552] transition-all duration-300" />
         </div>
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
           <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5c5552] transition-all duration-300" />
         </div>
         <div>
@@ -72,12 +75,12 @@
     </div>
   </div>
 
-  <!-- Supabase & Signup Logic -->
+  <!-- Supabase Signup Logic -->
   <script>
     const SUPABASE_URL = 'https://ylgtcwnwdplqwyrqkoxm.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsZ3Rjd253ZHBscXd5cnFrb3htIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwOTIzOTUsImV4cCI6MjA2ODY2ODM5NX0.sDOHrDw-oGOyLI2LsKBxxycAImHg1-xNOz2dNFqsrz4';
 
-    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const signupForm = document.getElementById('signup-form');
 
@@ -98,9 +101,7 @@
         email,
         password,
         options: {
-          data: {
-            full_name: fullName
-          },
+          data: { full_name: fullName },
           emailRedirectTo: "https://team-knowfiy.github.io/Knowfiy/index.html"
         }
       });
